@@ -3,7 +3,7 @@ import Fileter from "../../components/Fileter/Fileter";
 import LastPosted from "../../components/Last_Posted/LastPosted";
 import GeneralInfo from "../../components/General_info/GeneralInfo";
 
-const UserPannel = () => {
+const UserPannel = ({isLogedIn, setIsLogedIn}) => {
   return (
     <>
       <div className="batch-user-logout-container  bg-gradient-to-b from-[#0597FF2C] to-white ">
@@ -20,6 +20,9 @@ const UserPannel = () => {
           </div>
           <div className="logout-btn-container ">
             <button
+              onClick={() => {
+                setIsLogedIn(false)
+              }}
               type="submit"
               className="bg-[#2E90FA] px-8 py-3 rounded-lg border-b-4 border-b-[#86CAFF] text-white text-xl"
             >
@@ -28,7 +31,7 @@ const UserPannel = () => {
           </div>
         </div>
       </div>
-      <div className="filter-last-posted-gen-details flex gap-1 mx-32 px-5 mt-5">
+      <div className="filter-last-posted-gen-details flex justify-between gap-20 mx-auto px-5 mt-5 max-w-[1400px]">
         <Fileter/>
         <LastPosted/>
         <GeneralInfo/>
