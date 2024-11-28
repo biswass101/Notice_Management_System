@@ -12,11 +12,11 @@ const GeneralInfo = () => {
           </p>
           <div className="info-card flex flex-col gap-28 p-8 rounded-lg bg-gradient-to-bl from-red-100 to-cyan-50">
             <div className="user-name-batch flex justify-between text-xl">
-              <p>username</p>
+              <p>{localStorage.getItem('student_name') ? localStorage.getItem('student_name') : 'username'}</p>
               <p>cse61A</p>
             </div>
             <div className="identity-no font-bold text-4xl">
-              <p>0272230005101073</p>
+              <p>{localStorage.getItem('student_id') ? localStorage.getItem('student_id') : '0272230005xxxx'}</p>
             </div>
           </div>
         </div>

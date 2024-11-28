@@ -49,7 +49,8 @@ const Login = ({ setIsLogedIn }) => {
         if (allOk && data.token) {
           notify(data.message)
           localStorage.setItem("token", data.token);
-          localStorage.setItem("student_id", data.student_id);
+          localStorage.setItem("student_name", data.student_name);
+          localStorage.setItem("student_id", studentId.toString());
           localStorage.setItem("message", data.message);
           setIsLoading(false)
           setTimeout(() => {
@@ -77,7 +78,7 @@ const Login = ({ setIsLogedIn }) => {
           <h1 className="form-heading font-sans font-bold text-4xl text-[#101828]">
             Log in to portal 💯
           </h1>
-          <form>
+          <form onSubmit={(e) => {e.preventDefault()}}>
             <div className="lebel-input-btn-container flex flex-col gap-7">
               <div className="label-input-container">
                 <p className="font-sans font-[400] text-xl text-[#101828] mb-1">
