@@ -36,11 +36,26 @@ const PostCard = ({ ct }) => {
         )
       ) : null}
       <div className="post-type-course-name flex gap-3">
-        <div className="assignment flex gap-1 bg-[#FFEAD5] p-2 max-w-32">
-          <img src={assIcon} alt={assIcon} />
-          <p>{ct?.notice_type}</p>
+        <div
+          className={`assignment flex gap-3 ${
+            ct?.notice_type == "classroom_code"
+              ? "bg-[#EFF8FF]"
+              : "bg-[#FFEAD5]"
+          }  p-2 items-center rounded justify-center`}
+        >
+          {ct?.notice_type == "classroom_code" ? (
+            <img src={linkIcon} />
+          ) : (
+            <img src={assIcon} alt={assIcon} />
+          )}
+          <p>
+            {ct?.notice_type
+              .split("_")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ")}
+          </p>
         </div>
-        <div className="course-name flex gap-1 border border-black w-[200px] rounded items-center">
+        <div className="course-name flex gap-1 border border-black p-1 rounded items-center">
           <img
             className="h-[24px] w-[24px]"
             src={courseIcon}
@@ -51,7 +66,7 @@ const PostCard = ({ ct }) => {
       </div>
 
       {ct?.date ? (
-        <div className="submission-date-day flex gap-2 border bg-[#FDB022] border-black rounded max-w-[330px] p-1">
+        <div className="submission-date-day flex gap-2 items-center border bg-[#FDB022] border-black rounded p-1 w-[90%]">
           <img src={bellIcon} alt="Bell Icon" />
           <p>
             {ct?.notice_type === "exam" || ct?.notice_type === "class_test"
