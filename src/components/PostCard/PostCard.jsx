@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import dateIcon from "../../assets/images/date_icon.png";
 import assIcon from "../../assets/images/assignment_icon.png";
 import courseIcon from "../../assets/images/course_icon.png";
@@ -7,8 +7,13 @@ import linkIcon from "../../assets/images/LinkIcon.png";
 const PostCard = ({ ct }) => {
   // console.log("here");
   // console.log(ct);
+
+  const [descLength, setDescLength] = useState(100)
+  const handleReadMore = () => {
+    setDescLength(ct?.description.length)
+  }
   return (
-    <div className="post-card border border-slate-200 rounded flex flex-col gap-5 py-4 px-5">
+    <div className="post-card border border-slate-200 rounded flex flex-col gap-5 max-w-[40rem] py-4 px-5">
       <div className="date-day flex gap-1 p-1 border rounded border-cyan-500 max-w-[200px]">
         <img src={dateIcon} alt={dateIcon} />
         <h1 className="font-sans text-[#2E90FA] ">
@@ -16,13 +21,21 @@ const PostCard = ({ ct }) => {
         </h1>
       </div>
       <div className="car-details">
-        {ct?.notice_type == "classroom_code" ? (
+        {ct?.notice_type === "classroom_code" ? (
           <p className="font-bold text-5xl text-black">{ct?.description}</p>
         ) : (
-          <p>{ct.description}</p>
+          <div className="">
+            {ct?.description.length > descLength
+              ? <>{ct.description.substring(0, descLength) + '...'}
+                  <p onClick={handleReadMore} className="text-[#0597FF] cursor-pointer">Read More...</p>
+                </>// If the description is longer than 25 characters, truncate and add ellipsis
+              : <p onClick={() => {
+                !window.getSelection().toString() > 0 && setDescLength(100)
+              }}>{ct.description}</p>}
+          </div>
         )}
-        {/* description */}
       </div>
+
       {ct?.resource_link ? (
         ct?.notice_type == "classroom_code" ? (
           <button className="self-start text-xl text-white font-sans rounded bg-[#2E90FA] p-2">
@@ -57,7 +70,7 @@ const PostCard = ({ ct }) => {
         </div>
         <div className="course-name flex gap-1 border border-black p-1 rounded items-center">
           <img
-            className="h-[24px] w-[24px]"
+            className=""
             src={courseIcon}
             alt={courseIcon}
           />

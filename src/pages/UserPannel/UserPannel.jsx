@@ -86,7 +86,7 @@ const UserPannel = ({isLogedIn, setIsLogedIn}) => {
   return (
     <>
       <div className="batch-user-logout-container  bg-gradient-to-b from-[#0597FF2C] to-white ">
-        <div className="batch-user-logout-content mx-32 flex justify-between items-center">
+        <div className="batch-user-logout-content mx-auto max-w-[1400px] flex justify-between items-center">
           <div className="blur-bar  py-8 px-5">
             <div className="batch-name-user-name flex gap-36">
               <p className="font-bold font-sans text-[#2E90FA] text-3xl ">
@@ -97,13 +97,13 @@ const UserPannel = ({isLogedIn, setIsLogedIn}) => {
               </p>
             </div>
           </div>
-          <div className="logout-btn-container ">
+          <div className="logout-btn-container mr-4">
             <button
               onClick={() => {
                   handleLogout()
               }}
               type="submit"
-              className="bg-[#2E90FA] px-8 py-3 rounded-lg border-b-4 border-b-[#86CAFF] text-white text-xl"
+              className="logout-btn bg-[#2E90FA] px-8 py-3 rounded-lg border-b-4 border-b-[#86CAFF] text-white text-xl"
             >
               Logout
             </button>
