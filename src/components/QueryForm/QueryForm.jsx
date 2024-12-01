@@ -32,7 +32,7 @@ const QueryForm = ({isOpneQfrom, setIsopenQform}) => {
             <input
               className="w-full"
               type="email"
-              placeholder="Password"
+              placeholder="Enter Email"
               required
             />
           </div>
@@ -52,7 +52,7 @@ const QueryForm = ({isOpneQfrom, setIsopenQform}) => {
 
           <button onClick={(e) => {
             e.preventDefault()
-            console.log("clicked");
+            // console.log("clicked");
             setIsopenQform("hidden")
           }} className="close-btn-container flex gap-2 justify-center items-center text-lg rounded-lg px-7 border-b-4 border-[#FECDD6] bg-[#F63D68] text-white">
             <img className="text-white" src={crossIcon} alt="" /> Close{" "}
