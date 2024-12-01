@@ -16,7 +16,7 @@ const UserPannel = ({isLogedIn, setIsLogedIn}) => {
       let quParam = ''
       if(queryParams.length == 0)
       {
-        
+        ""
       }
       else {
         for(let i = 0; i < queryParams.length; i++) {
@@ -32,7 +32,7 @@ const UserPannel = ({isLogedIn, setIsLogedIn}) => {
       let finalQuery = url + quParam
 
       // console.log(finalQuery);
-      
+
       fetch(finalQuery, {
         method: "GET",
         headers: {
@@ -42,7 +42,7 @@ const UserPannel = ({isLogedIn, setIsLogedIn}) => {
     })
         .then((response) => {
           // console.log(response.status);
-            if (response.status === 200) {  
+            if (response.status === 200) {
                 response.json().then((data) => setAllPost(data))
             }
         })
@@ -68,9 +68,12 @@ const UserPannel = ({isLogedIn, setIsLogedIn}) => {
         })
             .then((response) => {
               // console.log(response.status);
-                if (response.status === 200) {  
+                if (response.status === 200) {
                     toast.success("Logout successful!");
                     localStorage.removeItem("token");
+                    localStorage.removeItem("student_name");
+                    localStorage.removeItem("student_id");
+                    localStorage.removeItem("message");
                     setTimeout(() => {
                       navigate("/login");
                     }, 2000);

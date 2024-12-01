@@ -6,6 +6,7 @@ import UserPannel from "./pages/UserPannel/UserPannel.jsx";
 import Login from "./pages/Login/Login.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute.jsx";
+import ProtectedLogin from "./components/ProtectedLogin/ProtectedLogin.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />
+        element: (
+          <ProtectedLogin>
+            <Login />
+          </ProtectedLogin>
+        )
       },
     ],
   },
