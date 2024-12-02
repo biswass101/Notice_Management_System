@@ -47,7 +47,7 @@ const Login = ({ setIsLogedIn }) => {
       })
       .then((data) => {
         if (allOk && data.token) {
-          notify(data.message)
+          toast.success(data.message)
           localStorage.setItem("token", data.token);
           localStorage.setItem("student_name", data.student_name);
           localStorage.setItem("student_id", studentId.toString());
@@ -59,7 +59,7 @@ const Login = ({ setIsLogedIn }) => {
         }
         else {
           setIsLoading(false)
-          notify(data.student_id[0])
+          toast.error(data.student_id[0])
         }
       })
       .catch((error) => {
