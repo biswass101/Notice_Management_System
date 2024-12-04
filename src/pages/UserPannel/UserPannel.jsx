@@ -4,11 +4,18 @@ import LastPosted from "../../components/Last_Posted/LastPosted";
 import GeneralInfo from "../../components/General_info/GeneralInfo";
 import { data, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import identityIcon from '../../assets/images/identity.svg'
+import GenerallnfoMobile from "../../components/General_info/GenerallnfoMobile";
 
 const UserPannel = ({isLogedIn, setIsLogedIn}) => {
   const navigate = useNavigate();
   const [allPost, setAllPost] = useState(null)
   const [queryParams, setQueryParams] = useState([])
+  const [isGenClicked, setIsGenClicked] = useState(false)
+  const [windowSize, setWindowSize] = useState(window.innerWidth)
+  useEffect(() => {
+      setWindowSize(window.innerWidth)
+  }, [windowSize])
   console.log(queryParams);
   // console.log(allPost);
     useEffect(() => {
@@ -86,38 +93,45 @@ const UserPannel = ({isLogedIn, setIsLogedIn}) => {
                 toast.error("An error occurred. Please try again.");
             });
     };
+
+  const handleGenInfo = () => {
+    setIsGenClicked(true)
+  }
   return (
     <>
       <div className="batch-user-logout-container  bg-gradient-to-b from-[#0597FF2C] to-white ">
         <div className="batch-user-logout-content mx-auto max-w-[1400px] flex justify-between items-center">
-          <div className="blur-bar  py-8 px-5">
-            <div className="batch-name-user-name flex gap-36">
-              <p className="font-bold font-sans text-[#2E90FA] text-3xl ">
+          <div className="blur-bar py-3 px-4  lg:py-8 lg:px-5">
+            <div className="batch-name-user-name flex flex-col lg:flex-row gap-2 lg:gap-36">
+              <p className="font-bold font-sans text-[#2E90FA] text-2xl xl:text-3xl ">
                 CSE61_A
               </p>
-              <p className="font-bold font-sans text-[#475467] text-3xl">
+              <p className={`font-bold ${isGenClicked ? 'hidden' : ''} font-sans text-[#475467] text-xl lg:text-2xl xl:text-3xl`}>
                 {`Hello!👋 ${localStorage.getItem('student_name') ? localStorage.getItem('student_name') : 'username'}`}
               </p>
             </div>
           </div>
-          <div className="logout-btn-container mr-4">
+          <div className="logout-btn-identity-container flex flex-col gap-4 self-start mt-4 mr-4">
             <button
               onClick={() => {
                   handleLogout()
               }}
               type="submit"
-              className="logout-btn bg-[#2E90FA] px-8 py-3 rounded-lg border-b-4 border-b-[#86CAFF] text-white text-xl"
+              className={`logout-btn ${isGenClicked ? 'hidden' : ''} bg-[#2E90FA] px-6 py-2 xl:px-8 xl:py-3 rounded-lg border-b-4 border-b-[#86CAFF] text-white text-sm lg:text-lg xl:text-xl`}
             >
               Logout
             </button>
+            <img onClick={handleGenInfo} className={`block ${isGenClicked ? 'hidden' : ''} self-end lg:hidden cursor-pointer`} src={identityIcon} alt={identityIcon} />
           </div>
         </div>
       </div>
-      <div className="filter-last-posted-gen-details flex justify-between gap-20 mx-auto px-5 mt-5 max-w-[1400px]">
+      {isGenClicked ? <GenerallnfoMobile isGenClicked={isGenClicked} setIsGenClicked={setIsGenClicked}/> : 
+      <div className="filter-last-posted-gen-details flex flex-col lg:flex-row justify-between gap-2 md:gap-6 xl:gap-15 mx-auto px-4 lg:px-5 mt-5 max-w-[1400px]">
         <Fileter setQueryParams={setQueryParams}/>
+        <p className='block text-center lg:hidden text-2xl font-sans font-bold '>Last Posted ⚡</p>
         <LastPosted allPost={allPost}/>
-        <GeneralInfo/>
-      </div>
+        <GeneralInfo windowSize={windowSize} setWindowSize={setWindowSize}/>
+      </div>}
       <ToastContainer/>
     </>
   );

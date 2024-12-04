@@ -13,18 +13,18 @@ const PostCard = ({ ct }) => {
     setDescLength(ct?.description.length)
   }
   return (
-    <div className="post-card border border-slate-200 rounded flex flex-col gap-5 max-w-[40rem] py-4 px-5">
+    <div className="post-card border border-slate-200 rounded flex flex-col gap-4 md:gap-5 w-[21rem] md:w-[26rem] lg:w-[28rem] py-3 px-4 xl:py-4 xl:px-5">
       <div className="date-day flex gap-1 p-1 border rounded border-cyan-500 max-w-[200px]">
         <img src={dateIcon} alt={dateIcon} />
-        <h1 className="font-sans text-[#2E90FA] ">
+        <p className="font-sans text-sm md:text-[1rem] text-[#2E90FA] ">
           {new Date(ct?.created_at).toDateString()}
-        </h1>
+        </p>
       </div>
       <div className="car-details">
         {ct?.notice_type === "classroom_code" ? (
-          <p className="font-bold text-5xl text-black">{ct?.description}</p>
+          <p className="font-bold text-3xl xl:text-5xl text-black">{ct?.description}</p>
         ) : (
-          <div className="">
+          <div className="text-sm md:text-[1rem]">
             {ct?.description.length > descLength
               ? <>{ct.description.substring(0, descLength) + '...'}
                   <p onClick={handleReadMore} className="text-[#0597FF] cursor-pointer">Read More...</p>
@@ -38,7 +38,7 @@ const PostCard = ({ ct }) => {
 
       {ct?.resource_link ? (
         ct?.notice_type == "classroom_code" ? (
-          <button className="self-start text-xl text-white font-sans rounded bg-[#2E90FA] p-2">
+          <button className="self-start text-lg xl:text-xl text-white font-sans rounded bg-[#2E90FA] p-1 xl:p-2">
             Join Classroom
           </button>
         ) : (
@@ -50,18 +50,18 @@ const PostCard = ({ ct }) => {
       ) : null}
       <div className="post-type-course-name flex gap-3">
         <div
-          className={`assignment flex gap-3 ${
+          className={`assignment flex gap-2 xl:gap-3 ${
             ct?.notice_type == "classroom_code"
               ? "bg-[#EFF8FF]"
               : "bg-[#FFEAD5]"
-          }  p-2 items-center rounded justify-center`}
+          }  p-1 xl:p-2 items-center rounded justify-center`}
         >
           {ct?.notice_type == "classroom_code" ? (
             <img src={linkIcon} />
           ) : (
             <img src={assIcon} alt={assIcon} />
           )}
-          <p>
+          <p className="text-sm md:text-[1rem]">
             {ct?.notice_type
               .split("_")
               .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -74,14 +74,14 @@ const PostCard = ({ ct }) => {
             src={courseIcon}
             alt={courseIcon}
           />
-          <p>{ct?.course_name}</p>
+          <p className="text-sm md:text-[1rem]">{ct?.course_name}</p>
         </div>
       </div>
 
       {ct?.date ? (
         <div className="submission-date-day flex gap-2 items-center border bg-[#FDB022] border-black rounded p-1 w-[90%]">
           <img src={bellIcon} alt="Bell Icon" />
-          <p>
+          <p className="text-sm md:text-[1rem]">
             {ct?.notice_type === "exam" || ct?.notice_type === "class_test"
               ? "Exam"
               : "Submission"}{" "}

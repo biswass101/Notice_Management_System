@@ -5,13 +5,9 @@
 }
 
 .login-popup {
-    position: absolute;
-    z-index: 1;
-    inset: 0;
+    
     background-color: #00000090;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    
 }
 
 .login-popup-container {
@@ -89,16 +85,3 @@
     /* Change border color on focus */
     outline: none; /* Remove outline */
   }
-
-@media screen and (max-width: 768px)
-{
-    .login-popup-container {
-
-        width: max(13vw, 350px);
-        gap: 10px;
-        padding: 15px 20px;
-        border-radius: 8px;
-        font-size: 14px;
-        animation: fadeIn 0.5s;
-    }
-}
